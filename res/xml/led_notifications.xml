@@ -18,10 +18,46 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/led_notifications_title" >
 
-<!-- EMPTY CATEGORY MESSAGE REMOVE This AFTER ADDING ELEMENTS! -->
-    <com.android.settings.applications.LayoutPreference
-        android:key="empty_category_message"
-        android:layout="@layout/empty_category_message" />
-<!-- EMPTY CATEGORY MESSAGE REMOVE This AFTER ADDING ELEMENTS! -->
+    <com.android.settings.aquarios.SystemSettingSwitchPreference
+        android:key="battery_light_enabled"
+        android:title="@string/battery_light_enable"
+        android:defaultValue="true"/>
+
+    <com.android.settings.aquarios.SystemSettingSwitchPreference
+        android:key="battery_light_allow_on_dnd"
+        android:title="@string/battery_light_allow_on_dnd_title"
+        android:dependency="battery_light_enabled"
+        android:defaultValue="false" />
+
+    <com.android.settings.aquarios.SystemSettingSwitchPreference
+        android:key="battery_light_low_blinking"
+        android:title="@string/battery_light_low_blinking_title"
+        android:dependency="battery_light_enabled"
+        android:defaultValue="false" />
+
+    <PreferenceCategory
+        android:key="battery_light_cat"
+        android:title="@string/battery_light_cat"
+        android:dependency="battery_light_enabled">
+        <com.jaredrummler.android.colorpicker.ColorPreference
+            android:key="battery_light_low_color"
+            android:title="@string/battery_light_low_color"
+            android:defaultValue="0xFFFF0000" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreference
+            android:key="battery_light_medium_color"
+            android:title="@string/battery_light_medium_color"
+            android:defaultValue="0xFFFFFF00" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreference
+            android:key="battery_light_full_color"
+            android:title="@string/battery_light_full_color"
+            android:defaultValue="0xFF00FF00" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreference
+            android:key="battery_light_reallyfull_color"
+            android:title="@string/battery_light_reallyfull_color"
+            android:defaultValue="0xFF00FF00" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
