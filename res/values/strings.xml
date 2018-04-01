@@ -736,4 +736,8 @@
     <string name="hide_lockscreen_alarm_title">Alarm text</string>
     <string name="hide_lockscreen_alarm_summary">Change the alarm text\'s visibility underneath the clock widget</string>
 
+    <!-- System default animation -->
+    <string name="android_p_animation_title">Android P animation style</string>
+    <string name="android_p_animation_summary">Enable Android P \"Default\" animations</string>
+
 </resources>

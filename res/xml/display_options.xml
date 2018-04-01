@@ -18,6 +18,12 @@
     <PreferenceCategory
         android:title="@string/general_animations_category"/>
 
+		<com.aquarios.coralreef.preference.GlobalSettingSwitchPreference
+            android:key="animations"
+			android:title="@string/android_p_animation_title"
+			android:summary="@string/android_p_animation_summary"
+			android:defaultValue="false" />
+
         <ListPreference
             android:key="screen_off_animation"
             android:title="@string/screen_off_animation_title"
