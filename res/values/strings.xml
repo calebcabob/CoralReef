@@ -36,6 +36,8 @@
 	    <string name="global_actions_screen_off_cat">Screen-off actions</string>
     <string name="volume_rocker_title">Volume rocker</string>
     <string name="volume_rocker_summary">Set default behavior and actions for vol +/- keys</string>
+        <string name="volume_rocker_general_category">General</string>
+        <string name="volume_rocker_advanced_category">Advanced</string>
     <!-- Lockscreen -->
     <string name="lockscreen_date_and_time_title">Lockscreen clocks</string>
     <string name="lockscreen_date_and_time_summary">Customize your view of date &amp; time on the lockscreen</string>
@@ -239,5 +241,23 @@
     <string name="recents_clear_all_location_bottom_right">Bottom right</string>
     <string name="recents_clear_all_location_bottom_left">Bottom left</string>
     <string name="recents_clear_all_location_bottom_center">Bottom center</string>
+
+    <!-- Volume Steps -->
+    <string name="volume_steps_title">Volume steps</string>
+    <string name="volume_steps_summary">Adjust the number of steps used with volume control actions</string>
+    <string name="volume_steps_alarm_title">Volume steps: Alarm</string>
+    <string name="volume_steps_dtmf_title">Volume steps: DTMF</string>
+    <string name="volume_steps_music_title">Volume steps: Music</string>
+    <string name="volume_steps_notification_title">Volume steps: Notification</string>
+    <string name="volume_steps_ring_title">Volume steps: Ringer</string>
+    <string name="volume_steps_system_title">Volume steps: System</string>
+    <string name="volume_steps_voice_call_title">Volume steps: Voice Call</string>
+    <string name="volume_steps_reset">Reset</string>
+    <string name="volume_steps_60" translatable="false">60</string>
+    <string name="volume_steps_45" translatable="false">45</string>
+    <string name="volume_steps_30" translatable="false">30</string>
+    <string name="volume_steps_15" translatable="false">15</string>
+    <string name="volume_steps_7" translatable="false">7</string>
+    <string name="volume_steps_5" translatable="false">5</string>
 
 </resources>
