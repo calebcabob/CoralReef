@@ -15,6 +15,21 @@
 -->
 <resources>
 
+    <!-- Color Picker -->
+    <declare-styleable name="ColorPickerView">
+        <attr name="palette" format="reference"/>
+        <attr name="selector" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="ColorPickerPreference">
+        <attr name="default_color" format="color"/>
+        <attr name="preference_palette" format="reference"/>
+        <attr name="preference_selector" format="reference"/>
+        <attr name="preference_dialog_title" format="string"/>
+        <attr name="preference_dialog_positive" format="string"/>
+        <attr name="preference_dialog_negative" format="string"/>
+    </declare-styleable>
+
+    <!-- CoralReef -->
     <declare-styleable name="CircularImageView">
         <attr name="civ_border" format="boolean"/>
         <attr name="civ_border_width" format="dimension"/>

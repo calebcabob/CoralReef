@@ -75,6 +75,7 @@
     <string name="empty_category_description">However, new features may be added here soon. Check back after future updates!</string>
 
     <!-- Color Picker -->
+    <string name="app_name">ColorPickerPreference</string>
 
 <!-- FEATURES -->
     <!-- Power Menu -->
