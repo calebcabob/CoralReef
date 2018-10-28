@@ -37,6 +37,7 @@
 				android:title="@string/tuner_show_info_header_title"
 				android:summary="@string/tuner_show_info_header_category"
 				android:defaultValue="true" />
+
 	</PreferenceCategory>
 
 </PreferenceScreen>
