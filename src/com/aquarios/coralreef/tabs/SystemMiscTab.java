@@ -33,6 +33,7 @@ public class SystemMiscTab extends SettingsPreferenceFragment implements Prefere
 
     private static final String RECENTS_CATEGORY = "recents_category";
     private static final String GESTURE_OPTIONS_CATEGORY = "gesture_options";
+    private static final String OMNIJAWS_WEATHER = "omnijaws_weather";
     private static final String MISCELLANEOUS_CATEGORY = "miscellaneous_category";
     private static final String CHANGELOG_CATEGORY = "changelog";
     private static final String DISPLAY_OPTIONS_CATEGORY = "display_options";
@@ -40,6 +41,7 @@ public class SystemMiscTab extends SettingsPreferenceFragment implements Prefere
 
     private LayoutPreference mRecents;
     private LayoutPreference mGestures;
+    private LayoutPreference mOmniJawsWeather;
     private LayoutPreference mMiscellaneous;
     private LayoutPreference mChangelog;
     private LayoutPreference mDisplay;
@@ -51,6 +53,9 @@ public class SystemMiscTab extends SettingsPreferenceFragment implements Prefere
 
         mRecents = (LayoutPreference) findPreference(RECENTS_CATEGORY);
         mRecents.setTitle(R.string.recents_title);
+
+        mOmniJawsWeather = (LayoutPreference) findPreference(OMNIJAWS_WEATHER);
+        mOmniJawsWeather.setTitle(R.string.omnijaws_weather_settings_title);
 
         mGestures = (LayoutPreference) findPreference(GESTURE_OPTIONS_CATEGORY);
         mGestures.setTitle(R.string.gesture_options_title);

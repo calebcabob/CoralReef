@@ -22,11 +22,6 @@
         android:layout="@layout/lockscreen_date_and_time" />
 
     <com.android.settings.applications.LayoutPreference
-        android:key="lockscreen_weather"
-        android:fragment="com.aquarios.coralreef.fragments.LockScreenWeather"
-        android:layout="@layout/lockscreen_weather" />
-
-    <com.android.settings.applications.LayoutPreference
         android:key="lockscreen_display_category"
         android:fragment="com.aquarios.coralreef.fragments.LockscreenDisplay"
         android:layout="@layout/lockscreen_display" />

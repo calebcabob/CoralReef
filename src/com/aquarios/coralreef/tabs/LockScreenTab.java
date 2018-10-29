@@ -32,11 +32,9 @@ public class LockScreenTab extends SettingsPreferenceFragment implements Prefere
 
     private static final String LOCKSCREEN_DATE_AND_TIME_CATEGORY = "lockscreen_date_and_time_category";
     private static final String LOCKSCREEN_DISPLAY_CATEGORY = "lockscreen_display_category";
-    private static final String LOCKSCREEN_WEATHER = "lockscreen_weather";
 
     private LayoutPreference mLockscreenDateTime;
     private LayoutPreference mLockscreenDisplay;
-    private LayoutPreference mLockscreenWeather;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,9 +46,6 @@ public class LockScreenTab extends SettingsPreferenceFragment implements Prefere
 
         mLockscreenDisplay = (LayoutPreference) findPreference(LOCKSCREEN_DISPLAY_CATEGORY);
         mLockscreenDisplay.setTitle(R.string.lockscreen_display_title);
-
-        mLockscreenWeather = (LayoutPreference) findPreference(LOCKSCREEN_WEATHER);
-        mLockscreenWeather.setTitle(R.string.lock_screen_weather_settings_title);
     }
 
     @Override
