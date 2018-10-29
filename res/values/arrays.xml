@@ -131,7 +131,7 @@
         <item>2</item>
     </string-array>
 
-    <!-- StatusBar weather settings -->
+    <!-- StatusBar weather -->
     <string-array name="status_bar_weather_entries" translatable="false">
         <item>@string/status_bar_weather_hidden</item>
         <item>@string/status_bar_temperature_image_show_scale</item>

@@ -36,7 +36,7 @@
         android:layout="@layout/display_options" />
 
     <com.android.settings.applications.LayoutPreference
-        android:key="weather"
+        android:key="omnijaws_weather"
         android:fragment="com.aquarios.coralreef.fragments.OmniJaws"
         android:layout="@layout/omnijaws" />
 
