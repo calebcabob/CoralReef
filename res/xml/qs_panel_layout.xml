@@ -30,7 +30,8 @@
 			<com.aquarios.support.preferences.SecureSettingSwitchPreference
 				android:key="qs_brightness_position_bottom"
 				android:title="@string/qs_brightness_position_bottom_title"
-				android:summary="@string/qs_brightness_position_bottom_summary"
+				android:summaryOn="@string/qs_brightness_slider_bottom"
+				android:summaryOff="@string/qs_brightness_slider_top"
 				android:defaultValue="false"
 				android:dependency="qs_show_brightness" />
 
@@ -40,6 +41,14 @@
 				android:summary="@string/brightness_icon_summary"
 				android:dependency="qs_show_brightness"
 				android:defaultValue="false"/>
+
+			<com.aquarios.support.preferences.SecureSettingSwitchPreference
+				android:key="qs_show_brightness_side_buttons"
+				android:title="@string/qs_brightness_side_buttons"
+				android:summaryOn="@string/qs_brightness_side_buttons_on"
+				android:summaryOff="@string/qs_brightness_side_buttons_off"
+				android:dependency="qs_show_brightness"
+				android:defaultValue="true" />
 	</PreferenceCategory>
 
 	<PreferenceCategory
