@@ -17,8 +17,11 @@
 package com.aquarios.coralreef.fragments;
 
 import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.ListPreference;
@@ -44,6 +47,7 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
     private static final String STATUS_BAR_CLOCK = "status_bar_clock";
     private static final String STATUS_BAR_CLOCK_SECONDS = "status_bar_clock_seconds";
     private static final String STATUS_BAR_CLOCK_STYLE = "statusbar_clock_style";
+    private static final String STATUS_BAR_CLOCK_STYLE_NOTCH = "statusbar_clock_style_notch";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK_DATE_DISPLAY = "clock_date_display";
     private static final String STATUS_BAR_CLOCK_DATE_STYLE = "clock_date_style";
@@ -55,6 +59,7 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
     private SwitchPreference mStatusBarClockShow;
     private SwitchPreference mStatusBarSecondsShow;
     private ListPreference mStatusBarClockStyle;
+    private ListPreference mStatusBarClockStyleNotch;
     private ListPreference mStatusBarAmPm;
     private ListPreference mClockDateDisplay;
     private ListPreference mClockDateStyle;
@@ -67,19 +72,24 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
 
         mStatusBarClockShow = (SwitchPreference) findPreference(STATUS_BAR_CLOCK);
         mStatusBarSecondsShow = (SwitchPreference) findPreference(STATUS_BAR_CLOCK_SECONDS);
-        mStatusBarClockStyle = (ListPreference) findPreference(STATUS_BAR_CLOCK_STYLE);
         mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
         mClockDateDisplay = (ListPreference) findPreference(STATUS_BAR_CLOCK_DATE_DISPLAY);
         mClockDateStyle = (ListPreference) findPreference(STATUS_BAR_CLOCK_DATE_STYLE);
         mClockDateFormat = (ListPreference) findPreference(STATUS_BAR_CLOCK_DATE_FORMAT);
+        mStatusBarClockStyle = (ListPreference) findPreference(STATUS_BAR_CLOCK_STYLE);
+        mStatusBarClockStyleNotch = (ListPreference) findPreference(STATUS_BAR_CLOCK_STYLE_NOTCH);
 
         mStatusBarClockShow.setOnPreferenceChangeListener(this);
-
         mStatusBarClockStyle.setOnPreferenceChangeListener(this);
+        mStatusBarClockStyleNotch.setOnPreferenceChangeListener(this);
         int clockStyle = Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.STATUSBAR_CLOCK_STYLE, 0);
+        int clockStyleNotch = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.STATUSBAR_CLOCK_STYLE_NOTCH, 0);
         mStatusBarClockStyle.setValue(String.valueOf(clockStyle));
         mStatusBarClockStyle.setSummary(mStatusBarClockStyle.getEntry());
+        mStatusBarClockStyleNotch.setValue(String.valueOf(clockStyleNotch));
+        mStatusBarClockStyleNotch.setSummary(mStatusBarClockStyleNotch.getEntry());
 
         if (DateFormat.is24HourFormat(getActivity())) {
             mStatusBarAmPm.setEnabled(false);
@@ -118,6 +128,15 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
         }
 
         parseClockDateFormats();
+
+        // Device has notch/ hide center clock option
+        boolean hideCenterClock = mContext.getResources().getDimensionPixelSize(
+                com.android.internal.R.dimen.status_bar_height_portrait);
+        if (hideCenterClock != 24dp) {
+            removePreference(STATUS_BAR_CLOCK_STYLE);
+        } else {
+            removePreference(STATUS_BAR_CLOCK_STYLE_NOTCH);
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -126,6 +145,7 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
             boolean value = (Boolean) newValue;
             mStatusBarSecondsShow.setEnabled(value);
             mStatusBarClockStyle.setEnabled(value);
+            mStatusBarClockStyleNotch.setEnabled(value);
             mStatusBarAmPm.setEnabled(value);
             mClockDateDisplay.setEnabled(value);
             mClockDateStyle.setEnabled(value);
@@ -137,6 +157,13 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_CLOCK_STYLE, clockStyle);
             mStatusBarClockStyle.setSummary(mStatusBarClockStyle.getEntries()[index]);
+            return true;
+        } else if (preference == mStatusBarClockStyleNotch) {
+            int clockStyleNotch = Integer.parseInt((String) newValue);
+            int index = mStatusBarClockStyleNotch.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_CLOCK_STYLE_NOTCH, clockStyleNotch);
+            mStatusBarClockStyleNotch.setSummary(mStatusBarClockStyleNotch.getEntries()[index]);
             return true;
         } else if (preference == mStatusBarAmPm) {
             int statusBarAmPm = Integer.valueOf((String) newValue);
