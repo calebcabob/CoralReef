@@ -22,6 +22,9 @@
     <!-- Whether to display clock options -->
     <bool name="has_clock_options">true</bool>
 
+    <!-- Whether to display center clock option -->
+    <bool name="has_notch_device">false</bool>
+
     <!-- Whether to display battery options -->
     <bool name="has_battery_options">true</bool>
 
