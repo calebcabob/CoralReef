@@ -18,44 +18,57 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/clock_options_title" >
 
-    <!-- Clock AM/PM -->
-    <com.aquarios.support.preferences.SecureSettingIntListPreference
-        android:key="statusbar_clock_am_pm_style"
-        android:entries="@array/entries_status_bar_am_pm"
-        android:entryValues="@array/values_status_bar_am_pm"
-        android:defaultValue="2"
-        android:title="@string/status_bar_am_pm_title" />
+    <PreferenceCategory
+        android:title="@string/status_bar_time_cat"/>
 
-    <!-- Date before clock style -->
-    <com.aquarios.support.preferences.SecureSettingIntListPreference
-        android:key="statusbar_clock_date_display"
-        android:entries="@array/clock_date_display_entries"
-        android:entryValues="@array/clock_date_display_values"
-        android:defaultValue="0"
-        android:title="@string/clock_date_display" />
+        <SwitchPreference
+            android:key="status_bar_show_clock"
+            android:title="@string/status_bar_show_clock_title"
+            android:defaultValue="true" />
 
-    <!-- Date before date style -->
-    <com.aquarios.support.preferences.SecureSettingIntListPreference
-        android:key="statusbar_clock_date_style"
-        android:entries="@array/clock_date_style_entries"
-        android:entryValues="@array/clock_date_style_values"
-        android:defaultValue="0"
-        android:title="@string/clock_date_style" />
+        <ListPreference
+            android:key="status_bar_clock_position"
+            android:dependency="status_bar_clock"
+            android:title="@string/clock_position" />
 
-    <!-- Date before date position -->
-    <com.aquarios.support.preferences.SecureSettingIntListPreference
-        android:key="statusbar_clock_date_position"
-        android:entries="@array/clock_date_position_entries"
-        android:entryValues="@array/clock_date_position_values"
-        android:defaultValue="0"
-        android:title="@string/clock_date_position" />
+        <ListPreference
+            android:key="status_bar_am_pm"
+            android:dialogTitle="@string/status_bar_am_pm_title"
+            android:title="@string/status_bar_am_pm_title"
+            android:entries="@array/entries_status_bar_am_pm"
+            android:entryValues="@array/values_status_bar_am_pm"
+            android:dependency="status_bar_show_clock" />
 
-    <!-- Date before date style -->
-    <com.aquarios.support.preferences.SecureSettingListPreference
-        android:key="statusbar_clock_date_format"
-        android:entries="@array/clock_date_format_entries_values"
-        android:entryValues="@array/clock_date_format_entries_values"
-        android:defaultValue="EEE"
-        android:title="@string/clock_date_format_custom" />
+    <PreferenceCategory
+        android:title="@string/clock_date_display"/>
+
+        <ListPreference
+            android:key="clock_date_display"
+            android:title="@string/clock_date_display"
+            android:summary="@string/clock_date_display_summary"
+            android:entries="@array/clock_date_display_entries"
+            android:entryValues="@array/clock_date_display_values"
+            android:dependency="status_bar_show_clock" />
+
+        <ListPreference
+            android:key="clock_date_style"
+            android:title="@string/clock_date_style"
+            android:entries="@array/clock_date_style_entries"
+            android:entryValues="@array/clock_date_style_values"
+            android:dependency="status_bar_show_clock" />
+
+        <ListPreference
+            android:key="clock_date_position"
+            android:title="@string/clock_date_position"
+            android:entries="@array/clock_date_position_entries"
+            android:entryValues="@array/clock_date_position_values"
+            android:dependency="status_bar_show_clock" />
+
+        <ListPreference
+            android:key="clock_date_format"
+            android:title="@string/clock_date_format"
+            android:entries="@array/clock_date_format_entries_values"
+            android:entryValues="@array/clock_date_format_entries_values"
+            android:dependency="status_bar_show_clock" />
 
 </PreferenceScreen>
