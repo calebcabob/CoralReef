@@ -40,8 +40,6 @@ import com.android.internal.util.aquarios.AquaUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
-import com.aquarios.support.preferences.SecureSettingIntListPreference;
-import com.aquarios.support.preferences.SecureSettingListPreference;
 import com.android.settings.R;
 import java.util.Date;
 
@@ -91,23 +89,16 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
         CharSequence[] NotchVisibleValues = {"0", "2"};
 
         mClockPosition.setEntries(AquaUtils.hasVisibleNotch(getActivity()) ? NotchVisibleEntries : NotchlessEntries);
-        mClockPosition.setDefaultValue("1");
+        mClockPosition.setDefaultValue("2");
         mClockPosition.setEntryValues(AquaUtils.hasVisibleNotch(getActivity()) ? NotchVisibleValues : NotchlessValues);
+        mClockPosition.setValue(String.valueOf(clockPosition));
         mClockPosition.setSummary(mClockPosition.getEntry());
         mClockPosition.setOnPreferenceChangeListener(this);
 
         mClockDateFormat = (ListPreference) findPreference(PREF_CLOCK_DATE_FORMAT);
         mClockDateFormat.setOnPreferenceChangeListener(this);
-        String value = Settings.Secure.getString(getActivity().getContentResolver(),
-                Settings.Secure.STATUSBAR_CLOCK_DATE_FORMAT);
-        if (value == null || value.isEmpty()) {
-            value = "EEE";
-        }
-        int index = mClockDateFormat.findIndexOfValue((String) value);
-        if (index == -1) {
-            mClockDateFormat.setValueIndex(CUSTOM_CLOCK_DATE_FORMAT_INDEX);
-        } else {
-            mClockDateFormat.setValue(value);
+        if (mClockDateFormat.getValue() == null) {
+            mClockDateFormat.setValue("EEE");
         }
 
         parseClockDateFormats();
@@ -176,14 +167,14 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
         } else if (preference == mClockDateFormat) {
             int index = mClockDateFormat.findIndexOfValue((String) newValue);
 
-             if (index == CUSTOM_CLOCK_DATE_FORMAT_INDEX) {
+            if (index == CUSTOM_CLOCK_DATE_FORMAT_INDEX) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setTitle(R.string.clock_date_string_edittext_title);
                 alert.setMessage(R.string.clock_date_string_edittext_summary);
 
                 final EditText input = new EditText(getActivity());
                 String oldText = Settings.Secure.getString(
-                    getActivity().getContentResolver(),
+                    resolver,
                     Settings.Secure.STATUSBAR_CLOCK_DATE_FORMAT);
                 if (oldText != null) {
                     input.setText(oldText);
@@ -196,9 +187,10 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
                         if (value.equals("")) {
                             return;
                         }
-                        Settings.Secure.putString(getActivity().getContentResolver(),
+                        Settings.Secure.putString(resolver,
                             Settings.Secure.STATUSBAR_CLOCK_DATE_FORMAT, value);
-                         return;
+
+                        return;
                     }
                 });
 
@@ -212,7 +204,7 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
                 dialog.show();
             } else {
                 if ((String) newValue != null) {
-                    Settings.Secure.putString(getActivity().getContentResolver(),
+                    Settings.Secure.putString(resolver,
                         Settings.Secure.STATUSBAR_CLOCK_DATE_FORMAT, (String) newValue);
                 }
             }
@@ -242,11 +234,13 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
     }
 
     private void parseClockDateFormats() {
-        String[] dateEntries = getResources().getStringArray(R.array.clock_date_format_entries_values);
+        String[] dateEntries = getResources().getStringArray(
+                R.array.clock_date_format_entries_values);
         CharSequence parsedDateEntries[];
         parsedDateEntries = new String[dateEntries.length];
         Date now = new Date();
-         int lastEntry = dateEntries.length - 1;
+
+        int lastEntry = dateEntries.length - 1;
         int dateFormat = Settings.Secure.getInt(getActivity()
                 .getContentResolver(), Settings.Secure.STATUSBAR_CLOCK_DATE_STYLE, 0);
         for (int i = 0; i < dateEntries.length; i++) {
@@ -262,7 +256,8 @@ public class ClockOptions extends SettingsPreferenceFragment implements Preferen
                 } else {
                     newDate = dateString.toString();
                 }
-                 parsedDateEntries[i] = newDate;
+
+                parsedDateEntries[i] = newDate;
             }
         }
         mClockDateFormat.setEntries(parsedDateEntries);
