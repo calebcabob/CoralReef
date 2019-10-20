@@ -41,6 +41,8 @@
         android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/icon_selector"
         app:itemTextColor="@drawable/icon_selector"
+        app:itemHorizontalTranslationEnabled="true"
+        app:labelVisibilityMode="selected"
         app:menu="@menu/main" />
 
 </RelativeLayout>
